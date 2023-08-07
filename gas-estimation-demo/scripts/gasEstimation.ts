@@ -51,12 +51,17 @@ async function main() {
   console.log("Estimated total fee (wei): ", estimatedFees.estimatedTotalFee.toString());
   console.log("\n");
 
-  // Executing the transaction on-chain and verifying actual values
+  //Executing the transaction on-chain and verifying actual values
   const signerBalanceBefore = await ethers.provider.getBalance(signerAddress);
+
   const exampleContract = await ethers.getContractAt("ExampleContract", EXAMPLE_CONTRACT_ADDRESS, signer);
+
   const tx = await exampleContract.setExampleVariable(newValueToSetOnExampleContract);
+
   const txReceipt = await tx.wait(5);
+
   const signerBalanceAfter = await ethers.provider.getBalance(signerAddress);
+
 
   if (!txReceipt) {
     throw new Error("Failed fetching the tx receipt, please try running the script again");
